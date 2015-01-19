@@ -1,7 +1,9 @@
-puts "What is your name"
+puts "What is your name dude"
 name = gets.chomp
 puts "Your name is #{name}!"
 puts "Tic tac toe."
+@game_on = true
+@good_spot = true
 
 # Draw a board
 # Asks for user to pick a location
@@ -46,38 +48,130 @@ def pick_location board, player
 	puts "Pick a location (1-9):"
 	location = gets.chomp.to_i
 	if location == 1
-		board[0][0] = player
+		if board[0][0] == 0
+			board[0][0] = player
+		else
+			@good_spot = false
+			puts "Please pick a blank location!"
+		end
 	elsif location == 2
-		board[0][1] = player
+		if board[0][1] == 0
+			board[0][1] = player
+		else
+			@good_spot = false
+			puts "Please pick a blank location!"
+		end
 	elsif location == 3
-		board[0][2] = player
+		if board[0][2] == 0
+			board[0][2] = player
+		else
+			@good_spot = false
+			puts "Please pick a blank location!"
+		end
 	elsif location == 4
-		board[1][0] = player
+		if board[1][0] == 0
+			board[1][0] = player
+		else
+			@good_spot = false
+			puts "Please pick a blank location!"
+		end
 	elsif location == 5
-		board[1][1] = player
+		if board[1][1] == 0
+			board[1][1] = player
+		else
+			@good_spot = false
+			puts "Please pick a blank location!"
+		end
 	elsif location == 6
-		board[1][2] = player
+		if board[1][2] == 0
+			board[1][2] = player
+		else
+			@good_spot = false
+			puts "Please pick a blank location!"
+		end
 	elsif location == 7
-		board[2][0] = player
+		if board[2][0] == 0
+			board[2][0] = player
+		else
+			@good_spot = false
+			puts "Please pick a blank location!"
+		end
 	elsif location == 8
-		board[2][1] = player
+		if board[2][1] == 0
+			board[2][1] = player
+		else
+			@good_spot = false
+			puts "Please pick a blank location!"
+		end
 	elsif location == 9
-		board[2][2] = player
+		if board[2][2] == 0
+			board[2][2] = player
+		else
+			@good_spot = false
+			puts "Please pick a blank location!"
+		end
+
 	end
 end
+
+
+
+def winner board
+	if board[0][0] == board[0][1] &&  board[0][1] == board[0][2] && board[0][0] != 0
+		@game_on = false
+		puts "Congrats!  You are the winner!"
+	elsif board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != 0
+		@game_on = false
+		puts "Congrats!  You are the winner!"
+	elsif board[0][0] == board[1][0] && board[1][0] == board[2][0] && board[0][0] != 0
+		@game_on = false
+		puts "Congrats!  You are the winner!"
+	elsif board[0][1] == board[1][1] && board[1][1] == board[2][1] && board[0][1] != 0
+		@game_on = false
+		puts "Congrats!  You are the winner!"
+	elsif board[0][2] == board[1][2] && board[1][2] == board[2][2] && board[0][2] != 0
+		@game_on = false
+		puts "Congrats!  You are the winner!"
+	elsif board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != 0
+		@game_on = false
+		puts "Congrats!  You are the winner!"
+	elsif board[1][0] == board[1][1] && board[1][1] == board[1][2] && board[1][0] != 0
+		@game_on = false
+		puts "Congrats!  You are the winner!"
+	elsif board[2][0] == board[2][1] && board[2][1] == board[2][2] && board[2][0] != 0
+		@game_on = false
+		puts "Congrats!  You are the winner!"
+	elsif board.all? { |spot| spot != 0 }
+		@game_on = false
+		puts "Cat tie!"
+	end
+end
+
+
+
+
 
 # puts draw_space(board[0][1])
 # 10.times do
 # 	draw_board
 # end
-while true
+while @game_on
+	p @game_on
+	# while @good_spot
+	# end
 	player = 1
-	draw_board(board, name)
-	pick_location(board, player)
-	player = 2
-	draw_board(board, name)
-	pick_location(board, player)
-	# parenthesis are not necessary
+		draw_board(board, name)
+		pick_location(board, player)
+		p board
+		board[0][0]
+		winner(board)
+	if @game_on != false
+		player = 2
+		draw_board(board, name)
+		pick_location(board, player)
+		winner(board)
+	end
+
 end
 
 # [12,3,4,5].each do |number|
